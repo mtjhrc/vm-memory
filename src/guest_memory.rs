@@ -404,7 +404,12 @@ pub trait GuestMemory {
     /// Type of objects hosted by the address space.
     type R: GuestMemoryRegion;
 
-    /// Returns the number of regions in the collection.
+    /// Type of Bitmap used in the memory regions.
+    type B: Bitmap
+    where
+        Self::R: GuestMemoryRegion<B = Self::B>;
+
+    /// Returns the number of regions in the colleSction.
     fn num_regions(&self) -> usize;
 
     /// Returns the region containing the specified address or `None`.
